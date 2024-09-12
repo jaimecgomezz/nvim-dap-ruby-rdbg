@@ -9,9 +9,7 @@
 ---@field type? string The debugger to use, default 'ruby'
 ---@field args? string[] The arguments provided to `rdbg`
 ---@field nonstop? boolean Should the `nonstop` flag be provided to `rdbg`?
----@field request? 'launch'|'attach' Indicates whether the debug adapter should
----launch a debbugee or attach to one. It default to 'launch' if any `args` or
----`target` is provided, false otherwise
+---@field request? 'launch'|'attach' Indicates whether the debug adapter should launch a debbugee or attach to one. It default to 'launch' if any `args` or `target` is provided, false otherwise
 ---@field target? 'line'|'file'|'workspace'|string The target that `rdbg` should execute
 ---      - "line": The line at cursor position
 ---      - "file":  The file currently opened
@@ -61,6 +59,10 @@ M.default_configurations = {
 	{
 		name = "rspec project (bundle)",
 		args = { "bundle", "exec", "rspec" },
+	},
+	{
+		name = "rails server",
+		args = { "rails", "server" },
 	},
 	{
 		name = "rails server (bin)",
