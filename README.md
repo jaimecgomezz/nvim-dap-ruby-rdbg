@@ -1,4 +1,4 @@
-# nvim-dap-ruby
+# nvim-dap-ruby-rdbg
 Ruby adapter for [nvim-dap](https://github.com/mfussenegger/nvim-dap) that uses
 [rdbg](https://github.com/ruby/debug) to enable debugging capabilities without
 modifying the source code, simply use [nvim-dap breackpoints](https://github.com/mfussenegger/nvim-dap?tab=readme-ov-file#usage).
@@ -128,4 +128,4 @@ Please see:
 ## Aknowledgements
 
 - [nvim-dap-ruby](https://github.com/suketa/nvim-dap-ruby): Served as a starting point for this project
-- [nvim-dap-python](https://github.com/mfussenegger/nvim-dap-python): Enlightened by example what would otherwise be a truly bumpy road
+- [nvim-dap-python](https://github.com/mfussenegger/nvim-dap-python): Enlightened, by example, what would otherwise be a truly bumpy road
