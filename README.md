@@ -31,8 +31,8 @@ Here's a complete `opts` example:
     -- The `rdbg` executable path, defaults to `rdbg`
     rdbg_path = "/usr/bin/rdbg",
     -- Indicates wheter `rdbg` should stop at program start or not. It is
-    -- applied to all configurations that doesn't specify it. Please see the
-    -- #nonstop section for more details.
+    -- applied to all configurations that don't specify it, default to `false`.
+    -- Please see the #nonstop section for more details.
     nonstop = false,
     -- Whether the default plugin configurations should be included or not, defaults to `true`
     should_include_default_configurations = false,
@@ -42,8 +42,7 @@ Here's a complete `opts` example:
             name = "debug my test file",
             -- The `cwd` is optional, if it isn't provided it defaults to `vim.fn.getcwd`
             cwd = '~/my-project',
-            -- The list of arguments that will be fed to `rdbg` after the `--command --` flags, please see:
-            -- https://github.com/ruby/debug?tab=readme-ov-file#rdbg-command-help
+            -- The list of arguments that will be fed to `rdbg`
             args = { "ruby", "my-test.rb" },
         },
         { -- Debug the currest rspec file
@@ -57,7 +56,8 @@ Here's a complete `opts` example:
             target = "file",
             -- Indicates whether `rdbg` should stop at the program start for
             -- this specific configuration, it overwrites the global `nonstop`
-            -- option. Please see the #nonstop section for more details.
+            -- option and defaults to it if not provided. Please see the #nonstop
+            -- section for more details.
             nonstop = true,
         },
         { 
@@ -75,7 +75,24 @@ Here's a complete `opts` example:
 }
 ```
 
-## Nonstop
+## Usage
+Open a `Ruby` file that you wish to debug, and call the following [lua
+commands](https://neovim.io/doc/user/lua-guide.html#lua-guide-using-Lua)
+
+```lua
+-- Set as many breakpoint as you want with the following command
+require("dap").toggle_breakpoint()
+
+-- Start a debug session, you'll be asked to choose a debug configuration
+require("dap").continue()
+
+-- If nvim-dap-ui is installed and properly configured, it should open its UI
+
+-- Now, move through your breackpoints
+require("dap").continue()
+```
+
+## --nonstop
 As stated above, this flag tells `rdbg` to stop, or not, at the beggining of the
 program. 
 
@@ -96,6 +113,10 @@ local dap_ruby = require("dap-ruby-rdbg")
 
 -- Pick the first three configs, for example
 dap_ruby.default_configurations = { unpack(dap_ruby.default_configurations, 1, 3) }
+
+dap_ruby.setup({
+    -- ... your configuration
+})
 ```
 
 ## Attach to debuggee
