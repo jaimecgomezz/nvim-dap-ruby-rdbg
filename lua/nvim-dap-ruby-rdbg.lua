@@ -144,23 +144,7 @@ end
 local function handle_args(config)
 	local args = {}
 
-	-- The `nonstop` flag indicates to `rdbg` that it SHOULD NOT stop at the
-	-- beginning of the program being debbugged. If not specified, it is set to
-	-- `false`.
-	--
-	-- I've tested the behavior of this flag on Linux and MacOS, and I've seen
-	-- weird results; on Linux the flag being set to `false` allows `nvim-dap`
-	-- to correctly handle breakpoints, while on MacOS, setting it to `true`
-	-- grants the same output. That's why I've enabled the `nonstop` option as a
-	-- global config, so anyone can test both options and use the one that fits
-	-- their system.
-	--
-	-- I'm sure that there's a valid explanation for this, but for now this is
-	-- good enough.
-	--
-	-- Please see:
-	--      - https://github.com/ruby/debug?tab=readme-ov-file#use-rdbg-with-commands-written-in-ruby
-	--      - https://github.com/ruby/debug?tab=readme-ov-file#invoke-as-a-remote-debuggee
+	-- Handle the `nonstop` flag, please see the #nonstop section from the `README.md`
 	if config.nonstop then
 		args = append(args, "--nonstop")
 	end

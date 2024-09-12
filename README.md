@@ -37,10 +37,10 @@ Here's a complete configuration example:
     should_include_default_configurations = false,
     -- A list of user defined debbugger configurations, defaults to `{}`
     configurations = {
-        { -- Debug a known file
+        { -- Debug a script
             name = "debug my test file",
             -- The `cwd` is optional, if it isn't provided it defaults to `vim.fn.getcwd`
-            cwd = '~/my-project'
+            cwd = '~/my-project',
             -- The list of arguments that will be fed to `rdbg` after the `--command --` flags, please see:
             -- https://github.com/ruby/debug?tab=readme-ov-file#rdbg-command-help
             args = { "ruby", "my-test.rb" },
@@ -52,17 +52,17 @@ Here's a complete configuration example:
             --      - line (line at cursor position), e.g. Debug a single spec
             --      - file (current file), e.g. Debug all specs in a file
             --      - workspace (current working directory), e.g. Debug all specs
-            --      - any other string will be used as is
-            target = "file"
+            --      - any other string will be used as provided
+            target = "file",
             -- Indicates whether `rdbg` should stop at the program start for
-            -- this specific configuration, it overwrites the default `nonstop`
+            -- this specific configuration, it overwrites the global `nonstop`
             -- option. Please see the #nonstop section for more details.
             nonstop = true,
         },
         { 
             -- Attach a running `rdbg` instance. By providing no `args` nor
             -- `target` values it's understood that you want to connect to a
-            -- debuggee
+            -- debuggee. Please see the #attach-to-debbuggee instance
             name = "attach to a debuggee",
             -- The `port` is optional, if isn't provided, you'll be prompted for
             -- one at the beginning of the debug session
@@ -99,6 +99,28 @@ local configs = dap_ruby.default_configurations
 dap_ruby.default_configurations = { unpack(configs, 1, 3) }
 ```
 
+## Attach to debbuggee
+Although is possible to inspect the `rdbg` output by opening the `nvim-dap`
+REPL as follows
+
+```lua
+require("dap").repl.toggle()
+```
+
+There might be instances where you might prefer manually starting `rdbg` in
+another terminal and follow along with your code as you debug. Here are some
+sample commands taken from the [rdbg command help](https://github.com/ruby/debug?tab=readme-ov-file#rdbg-command-help)
+section.
+
+```sh
+$ rdbg -O --port 1234 target.rb foo bar # starts accepts attaching with TCP/IP localhost:1234.
+$ rdbg -O --port 1234 -- -r foo -e bar  # starts accepts attaching with TCP/IP localhost:1234.
+```
+
+After the `rdbg` instance is running, you can then run the `attach to debugger`
+default config and connect to it by providing the `1234` port when prompted for
+it.
+
 Please see:
-     - https://github.com/ruby/debug?tab=readme-ov-file#use-rdbg-with-commands-written-in-ruby
-     - https://github.com/ruby/debug?tab=readme-ov-file#invoke-as-a-remote-debuggee
+- https://github.com/ruby/debug?tab=readme-ov-file#use-rdbg-with-commands-written-in-ruby
+- https://github.com/ruby/debug?tab=readme-ov-file#invoke-as-a-remote-debuggee
