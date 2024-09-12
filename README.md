@@ -94,7 +94,7 @@ you can access them as follows:
 ```lua
 local dap_ruby = require("dap-ruby-rdbg")
 
-# Pick the first three configs, for example
+-- Pick the first three configs, for example
 dap_ruby.default_configurations = { unpack(dap_ruby.default_configurations, 1, 3) }
 ```
 
@@ -106,9 +106,10 @@ REPL as follows:
 require("dap").repl.toggle()
 ```
 
-There might be instances where you might prefer manually starting `rdbg` in
-another terminal and follow along with your code as you debug. Here are some
-sample commands taken from the [rdbg command help](https://github.com/ruby/debug?tab=readme-ov-file#rdbg-command-help)
+There might be instances where you'd like to manually start `rdbg` in another
+terminal and follow along with your code as you debug. Here are some sample
+commands taken from the [rdbg command
+help](https://github.com/ruby/debug?tab=readme-ov-file#rdbg-command-help)
 section.
 
 ```sh
