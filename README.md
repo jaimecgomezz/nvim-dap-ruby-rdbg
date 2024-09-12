@@ -61,9 +61,9 @@ Here's a complete `opts` example:
             nonstop = true,
         },
         { 
-            -- Attach a running `rdbg` instance. By providing no `args` nor
-            -- `target` values it's understood that you want to connect to a
-            -- debuggee. Please see the #attach-to-debuggee instance
+            -- Attach a running `rdbg` instance. By providing no `args` or
+            -- `target` values, it is understood that you want to connect to a
+            -- debuggee. Please see the #attach-to-debuggee section for more details
             name = "attach to a debuggee",
             -- The `port` is optional, if isn't provided, you'll be prompted for
             -- one at the beginning of the debug session
@@ -79,30 +79,28 @@ Here's a complete `opts` example:
 As stated above, this flag tells `rdbg` to stop, or not, at the beggining of the
 program. 
 
-I've tested the behavior of this flag on Linux and MacOS, and I've seen weird
-somewhat confusing results; on Linux, the flag being set to `false` allows
-`rdbg` to start adequately and open the necesary TCP/IP connections for
-`nvim-dap` to connect to, whilst on MacOS, setting it to `true` grants the same
-output.
+I've tested the behavior of this flag on Linux and MacOS, and I've seen somewhat
+confusing results; on Linux, the flag being set to `false` allows `rdbg` to
+start adequately and open the necesary TCP/IP connections for `nvim-dap` to
+connect to, whilst on MacOS, setting it to `true` grants the same output.
 
 I'm sure that there's a valid explanation for this, but for now, enabling a
-global `opts.nonstop` option, as well as a config-specific flag, should grants
-the user the necessary flexibility to configure it as needed.
+global `opts.nonstop` option, as well as a config-specific one, should grant the
+necessary flexibility.
 
-Additionally, if you need to improve/modify or inspect the default
-configurations, you can access them as follows:
+Additionally, if you need to improve/modify/inspect the default configurations,
+you can access them as follows:
 
 ```lua
 local dap_ruby = require("dap-ruby-rdbg")
 
 # Pick the first three configs, for example
-local configs = dap_ruby.default_configurations
-dap_ruby.default_configurations = { unpack(configs, 1, 3) }
+dap_ruby.default_configurations = { unpack(dap_ruby.default_configurations, 1, 3) }
 ```
 
 ## Attach to debuggee
 Although is possible to inspect the `rdbg` output by opening the `nvim-dap`
-REPL as follows
+REPL as follows:
 
 ```lua
 require("dap").repl.toggle()
