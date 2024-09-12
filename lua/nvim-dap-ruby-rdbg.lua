@@ -61,16 +61,8 @@ M.default_configurations = {
 		args = { "bundle", "exec", "rspec" },
 	},
 	{
-		name = "rails server",
-		args = { "rails", "server" },
-	},
-	{
 		name = "rails server (bin)",
 		args = { "bin/rails", "server" },
-	},
-	{
-		name = "rails server (bundle)",
-		args = { "bundle", "exec", "rails", "server" },
 	},
 	{
 		name = "attach to debugger",
@@ -153,7 +145,7 @@ local function handle_args(config)
 	local args = {}
 
 	-- The `nonstop` flag indicates to `rdbg` that it SHOULD NOT stop at the
-	-- beggining of the program being debbugged. If not specified, it is set to
+	-- beginning of the program being debbugged. If not specified, it is set to
 	-- `false`.
 	--
 	-- I've tested the behavior of this flag on Linux and MacOS, and I've seen
