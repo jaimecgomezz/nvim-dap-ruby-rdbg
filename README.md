@@ -36,7 +36,7 @@ Here's a complete `opts` example:
     nonstop = false,
     -- Whether the default plugin configurations should be included or not, defaults to `true`
     should_include_default_configurations = false,
-    -- A list of user defined debbugger configurations, defaults to `{}`
+    -- A list of user defined debugger configurations, defaults to `{}`
     configurations = {
         { -- Debug a script
             name = "debug my test file",
@@ -63,7 +63,7 @@ Here's a complete `opts` example:
         { 
             -- Attach a running `rdbg` instance. By providing no `args` nor
             -- `target` values it's understood that you want to connect to a
-            -- debuggee. Please see the #attach-to-debbuggee instance
+            -- debuggee. Please see the #attach-to-debuggee instance
             name = "attach to a debuggee",
             -- The `port` is optional, if isn't provided, you'll be prompted for
             -- one at the beginning of the debug session
@@ -100,7 +100,7 @@ local configs = dap_ruby.default_configurations
 dap_ruby.default_configurations = { unpack(configs, 1, 3) }
 ```
 
-## Attach to debbuggee
+## Attach to debuggee
 Although is possible to inspect the `rdbg` output by opening the `nvim-dap`
 REPL as follows
 

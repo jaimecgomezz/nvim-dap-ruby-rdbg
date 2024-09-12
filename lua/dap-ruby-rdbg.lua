@@ -9,7 +9,7 @@
 ---@field type? string The debugger to use, default 'ruby'
 ---@field args? string[] The arguments provided to `rdbg`
 ---@field nonstop? boolean Should the `nonstop` flag be provided to `rdbg`?
----@field request? 'launch'|'attach' Indicates whether the debug adapter should launch a debbugee or attach to one. It default to 'launch' if any `args` or `target` is provided, false otherwise
+---@field request? 'launch'|'attach' Indicates whether the debug adapter should launch a debugee or attach to one. It default to 'launch' if any `args` or `target` is provided, false otherwise
 ---@field target? 'line'|'file'|'workspace'|string The target that `rdbg` should execute
 ---      - "line": The line at cursor position
 ---      - "file":  The file currently opened
@@ -129,7 +129,7 @@ local function has_valid_args(args)
 	return true
 end
 
-local function spawns_debbugger(config)
+local function spawns_debugger(config)
 	if has_valid_args(config.args) then
 		return true
 	end
@@ -184,11 +184,11 @@ end
 
 local function generate_adapter(opts)
 	return function(callback, config)
-		local will_spawn_debbugger = spawns_debbugger(config)
+		local will_spawn_debugger = spawns_debugger(config)
 
 		config.cwd = config.cwd or vim.fn.getcwd()
 		config.host = config.host or "127.0.0.1"
-		config.port = config.port or (will_spawn_debbugger and get_port(false) or get_port(true))
+		config.port = config.port or (will_spawn_debugger and get_port(false) or get_port(true))
 
 		assert(config.port, "A port is required in order to run debugger")
 
@@ -198,7 +198,7 @@ local function generate_adapter(opts)
 			port = config.port,
 		}
 
-		if will_spawn_debbugger then
+		if will_spawn_debugger then
 			configured.executable = {
 				cwd = config.cwd,
 				command = opts.rdbg_path,
@@ -226,7 +226,7 @@ local function generate_configurations(opts)
 			type = "ruby",
 			localfs = true, -- Why the hell is this needed? Not sure
 			nonstop = opts.nonstop == nil and false or opts.nonstop,
-			request = spawns_debbugger(config) and "launch" or "attach",
+			request = spawns_debugger(config) and "launch" or "attach",
 		})
 	end
 
