@@ -14,6 +14,7 @@ Using [lazy.nvim](https://github.com/folke/lazy.nvim):
 {
     "mfussenegger/nvim-dap",
     dependencies = {
+        { "rcarriga/nvim-dap-ui", dependencies = { "nvim-neotest/nvim-nio" } }, -- optional, but recommended
         {
             "jaimecgomezz/nvim-dap-ruby-rdbg",
             opts = {},
@@ -24,7 +25,7 @@ Using [lazy.nvim](https://github.com/folke/lazy.nvim):
 
 ## Configuration
 
-Here's a complete configuration example:
+Here's a complete `opts` example:
 ```lua
 {
     -- The `rdbg` executable path, defaults to `rdbg`
@@ -124,3 +125,8 @@ it.
 Please see:
 - https://github.com/ruby/debug?tab=readme-ov-file#use-rdbg-with-commands-written-in-ruby
 - https://github.com/ruby/debug?tab=readme-ov-file#invoke-as-a-remote-debuggee
+
+## Aknowledgements
+
+- [nvim-dap-ruby](https://github.com/suketa/nvim-dap-ruby): Served as a starting point for this project
+- [nvim-dap-python](https://github.com/mfussenegger/nvim-dap-python): Enlightened by example what would otherwise be a truly bumpy road
